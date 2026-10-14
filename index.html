@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="だんどり道場">
+<meta name="format-detection" content="telephone=no">
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>だんどり道場</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,6 +44,7 @@
 
 *{box-sizing:border-box}
 html,body{min-height:100%}
+html{touch-action:manipulation}
 body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:20px;line-height:1.65;-webkit-text-size-adjust:100%;word-break:auto-phrase;overflow-wrap:anywhere}
 .app{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:18px 40px}
 .screen{display:flex;flex-direction:column;gap:22px}
@@ -173,7 +177,9 @@ button{font:inherit;color:inherit;touch-action:manipulation;cursor:pointer;-webk
 .gtitle{display:flex;gap:12px;align-items:center;font-family:var(--font-display);font-weight:900;font-size:1.5rem}
 .lvbadge{font-family:var(--font-body);font-size:.9rem;font-weight:700;background:var(--primary);color:var(--primary-ink);border-radius:999px;padding:4px 14px}
 .gprog{font-size:1.1rem;font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
-.area{position:relative;flex:1 1 auto;min-height:0}
+.area{position:relative;flex:1 1 auto;min-height:0;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.area>:not(.overlay):not(.count):not(.toast),.msub>:not(.overlay):not(.count){position:absolute;top:0;right:0;bottom:0;left:0;height:auto}
+.area input,.area textarea{-webkit-user-select:text;user-select:text}
 body.gaming .app{padding-block:8px}
 #scr-game{gap:8px;height:calc(100vh - 16px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));height:calc(100dvh - 16px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));min-height:460px}
 #scr-game .gbar{position:static;padding-block:0}
@@ -204,16 +210,16 @@ body.gaming .app{padding-block:8px}
 .tinfo .need{font-family:var(--font-display);font-weight:900;font-size:clamp(1.8rem,5vw,2.4rem);line-height:1.1;color:var(--primary)}
 .tinfo .now{font-size:1.1rem;font-variant-numeric:tabular-nums}
 .tinfo .now b{font-size:1.6rem}
-.tboard{position:relative;flex:1 1 auto;min-height:0;container-type:size;background:var(--surface);border-radius:26px;padding:10px 12px;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+.tboard{position:relative;flex:1 1 auto;min-height:0;overflow:hidden;background:var(--surface);border-radius:26px;padding:10px 12px;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
 .tfoot{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:center}
-.pegs{--b:clamp(44px,10vw,96px);--b:clamp(36px,min(26cqw,calc(22cqh - 22px)),104px);padding-top:calc(var(--b) * .6);display:flex;align-items:flex-end;justify-content:center;gap:clamp(14px,3.5vw,44px)}
+.pegs{--b:64px;padding-top:calc(var(--b) * .6);display:flex;align-items:flex-end;justify-content:center;gap:20px}
 .pegs.mini{--b:40px;gap:10px}
 .peg{position:relative;width:calc(var(--b) + 26px);height:calc(var(--cap) * var(--b) + 30px);background:none;border:3px solid transparent;border-radius:18px;padding:0 0 18px;display:flex;flex-direction:column-reverse;align-items:center}
 .pegs.mini .peg{height:calc(var(--cap) * var(--b) + 20px);padding-bottom:10px;border:0;width:calc(var(--b) + 12px)}
-.peg::before{content:"";position:absolute;left:50%;bottom:10px;width:12px;height:calc(var(--cap) * var(--b) + 12px);background:var(--rod);border-radius:6px;transform:translateX(-50%)}
-.peg::after{content:"";position:absolute;left:0;right:0;bottom:0;height:14px;background:var(--rod);border-radius:7px}
-.pegs.mini .peg::before{width:6px;bottom:6px}
-.pegs.mini .peg::after{height:8px}
+.peg>.rod{position:absolute;left:50%;bottom:10px;width:12px;margin-left:-6px;height:calc(var(--cap) * var(--b) + 12px);background:var(--rod);border-radius:6px}
+.peg>.base{position:absolute;left:0;right:0;bottom:0;height:14px;background:var(--rod);border-radius:7px}
+.pegs.mini .peg>.rod{width:6px;margin-left:-3px;bottom:6px}
+.pegs.mini .peg>.base{height:8px}
 .peg.can{border-color:var(--accent);border-style:dashed;background:var(--accent-soft)}
 .ball{position:relative;z-index:1;width:var(--b);height:var(--b);border-radius:50%;display:grid;place-items:center;color:var(--ball-ink);font-weight:700;font-size:calc(var(--b) * .34);box-shadow:inset -5px -7px 0 rgba(0,0,0,.18);transition:transform .18s}
 .ball.bR{background:var(--ballR)}.ball.bB{background:var(--ballB)}.ball.bY{background:var(--ballY)}
@@ -223,9 +229,9 @@ body.gaming .app{padding-block:8px}
 
 /* ---------- お出かけ計画 ---------- */
 .errand{height:100%;display:flex;flex-direction:column;gap:10px}
-.map-wrap{flex:0 1 auto;min-height:0;max-height:56%;display:flex;justify-content:center;align-items:center;background:var(--surface);border-radius:22px;padding:6px;box-shadow:var(--shadow)}
-.map{width:100%;height:auto;max-height:100%;display:block}
-@media (min-width:900px) and (orientation:landscape){.errand{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(300px,1fr);grid-template-rows:minmax(0,1fr)}.map-wrap{max-height:none;height:100%}.map{height:100%}}
+.map-wrap{flex:0 0 auto;min-height:0;display:flex;justify-content:center;align-items:center;background:var(--surface);border-radius:22px;padding:6px;box-shadow:var(--shadow)}
+.map{display:block;width:300px;height:216px}
+@media (min-width:900px) and (orientation:landscape){.errand{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(300px,1fr);grid-template-rows:minmax(0,1fr)}.map-wrap{height:auto;flex:none}}
 @media (max-width:600px){.memo{padding:14px}.todo li{padding:6px 10px}.rules li{padding:8px 12px}}
 .m-ground{fill:var(--map-ground)}
 .m-road{stroke:var(--road);stroke-width:22}
@@ -260,6 +266,7 @@ body.gaming .app{padding-block:8px}
 .checks li.ng .mk{color:var(--bad)}
 .hint{font-size:.95rem;color:var(--muted);line-height:1.5}
 .memo-actions{display:flex;flex-wrap:wrap;gap:10px}
+.memo>.memo-actions{position:sticky;bottom:0;z-index:2;background:var(--surface);padding-block:8px 2px;box-shadow:0 -10px 10px -6px var(--surface)}
 .memo-actions .btn{flex:1 1 auto}
 .memo-actions .wide{flex:1 1 100%}
 .dist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
@@ -421,7 +428,7 @@ body.gaming .app{padding-block:8px}
 .mz-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 14px;font-weight:700;background:var(--surface);border-radius:16px;padding:8px 14px;box-shadow:var(--shadow);flex:none}
 .mz-stat{color:var(--muted);font-variant-numeric:tabular-nums}
 .mz-box{position:relative;flex:1 1 auto;min-height:0;display:grid;place-items:center;background:var(--surface);border-radius:22px;box-shadow:var(--shadow);padding:8px}
-.mz-svg{max-width:100%;max-height:100%;width:auto;height:100%;aspect-ratio:1;touch-action:none;user-select:none;-webkit-user-select:none}
+.mz-svg{display:block;width:300px;height:300px;touch-action:none;user-select:none;-webkit-user-select:none}
 .mz-bg{fill:var(--surface-2)}
 .mz-walls line{stroke:var(--ink);stroke-width:1.1;stroke-linecap:round}
 .mz-path{fill:none;stroke:var(--accent);stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;opacity:.85}
@@ -677,6 +684,7 @@ let actx=null, master=null;
 function ac(){
   if(!actx){try{actx=new (window.AudioContext||window.webkitAudioContext)();master=actx.createGain();master.connect(actx.destination);}catch(e){return null;}}
   if(actx.state==='suspended')actx.resume();
+  if(!ac.spoke){ac.spoke=true;try{if(window.speechSynthesis){const u=new SpeechSynthesisUtterance(' ');u.volume=0;speechSynthesis.speak(u);}}catch(e){}}
   master.gain.value=DATA.settings.vol;return actx;
 }
 function tone(f,start,dur,type='sine',vol=.25,slide){
@@ -906,10 +914,19 @@ function pegsHTML(s,mini,held){
   return `<div class="pegs ${mini?'mini':''}">`+s.map((p,i)=>{
     const can=held!=null&&held!==i&&p.length<CAPS[i];
     const balls=p.map((c,j)=>`<span class="ball b${c} ${held===i&&j===p.length-1?'held':''}">${BALLN[c]}</span>`).join('');
-    return mini?`<div class="peg" style="--cap:${CAPS[i]}">${balls}</div>`:`<button class="peg ${can?'can':''}" style="--cap:${CAPS[i]}" data-peg="${i}" aria-label="${i+1}本目の棒（${CAPS[i]}個まで）">${balls}</button>`;
+    const rod='<i class="rod"></i><i class="base"></i>';
+    return mini?`<div class="peg" style="--cap:${CAPS[i]}">${rod}${balls}</div>`:`<button class="peg ${can?'can':''}" style="--cap:${CAPS[i]}" data-peg="${i}" aria-label="${i+1}本目の棒（${CAPS[i]}個まで）">${rod}${balls}</button>`;
   }).join('')+'</div>';
 }
+/* 盤面の実際の大きさを測って、ボールと棒の大きさをpxで決める（Safariでも同じ見た目にするため） */
+function fitTower(){const bd=$('#tboard');if(!bd)return;const pg=bd.querySelector('.pegs'),ft=bd.querySelector('.tfoot');if(!pg)return;
+  const W=bd.clientWidth-24,H=bd.clientHeight-24-(ft?ft.offsetHeight+10:0);
+  const b=Math.max(30,Math.floor(Math.min((W-78)/3.6,(H-34)/3.6,110)));
+  pg.style.setProperty('--b',b+'px');pg.style.gap=Math.round(b*.3)+'px';}
+function watchFit(ctx,fn){try{const ro=new ResizeObserver(()=>{if(ctx.dead()){ro.disconnect();return;}fn();});ro.observe(ctx.area);}catch(e){}
+  const h=()=>{if(ctx.dead()){window.removeEventListener('resize',h);return;}setTimeout(fn,60);};window.addEventListener('resize',h);window.addEventListener('orientationchange',h);}
 function runTower(ctx){
+  watchFit(ctx,fitTower);
   const L=ctx.level,N=ctx.quick?1:4,need=[2,3,4,5,6][L-1];let idx=0;const rec=[];
   next();
   function next(){
@@ -923,6 +940,7 @@ function runTower(ctx){
         <div class="tgoal"><div class="lbl">見本</div>${pegsHTML(goal,true)}</div>
         <div class="tinfo"><div class="need">${P.min}手</div><div>で見本の形に</div><div class="now">いま <b>${moves}</b> 手</div></div></div>
         <div class="tboard" id="tboard">${pegsHTML(state,false,held)}<div class="tfoot"><p class="hint">ボールの棒 → 置きたい棒 の順にタッチ</p><button class="btn ghost small" data-act="reset">最初の形にもどす</button></div></div></div>`;
+      fitTower();
     }
     ctx.area.onclick=e=>{
       if(lock)return;
@@ -1006,7 +1024,13 @@ function errandProblem(L){
   }
 }
 const km=d=>(d/400).toFixed(1);
+function fitErrand(){const er=$('.errand'),mw=$('.map-wrap'),svg=$('.map');if(!er||!mw||!svg)return;
+  const grid=getComputedStyle(er).display==='grid';let W,H;
+  if(grid){W=mw.clientWidth-12;H=er.clientHeight-12;}
+  else{W=er.clientWidth-12;H=er.clientHeight*0.56-12;}
+  const w=Math.max(200,Math.floor(Math.min(W,H*1000/720)));svg.style.width=w+'px';svg.style.height=Math.round(w*.72)+'px';}
 function runErrand(ctx){
+  watchFit(ctx,fitErrand);
   const L=ctx.level,N=ctx.quick?1:2;let pi=0;const rec=[];
   next();
   function next(){
@@ -1020,7 +1044,7 @@ function runErrand(ctx){
     [200,400,600,800].forEach(x=>base+=`<line y1="0" y2="720" x1="${x}" x2="${x}" class="m-road"/>`);
     ctx.area.innerHTML=`<div class="errand"><div class="map-wrap"><svg class="map" viewBox="0 0 1000 720" role="img" aria-label="町の地図">${base}<g id="optR"></g><g id="route"></g><g id="nodes">${node(P.home,'home')}${shuffle(all).map(p=>node(p,'place')).join('')}</g><g id="walker"></g></svg></div><aside class="memo" id="memo"></aside></div>`;
     if(pi===0&&!ctx.quick)say(L===1?'メモの用事を、近い順番に回りましょう。':'まずルールを読んでから、回る順番を決めましょう。');
-    memoPlan();drawRoute();
+    memoPlan();drawRoute();fitErrand();
     function pts(closed){const a=[P.home,...order.map(id=>P.by[id])];if(closed)a.push(P.home);return a;}
     function drawRoute(){
       const p=pts(order.length===P.targets.length);
@@ -1413,6 +1437,8 @@ function runMaze(ctx){
     ${emo(start,'🏠')}${emo(goal,'🏁')}${stars.map((k,i)=>emo(k,'⭐','mzS'+i)).join('')}
     <circle id="mzMe" r="${S*.24}" class="mz-me"/>${hits}</svg></div>
     <div class="mz-foot"><p class="hint">なぞる前に、目でゴールまでの道をたどってみましょう。戻るときは、来た道をなぞります。</p></div></div>`;
+  const fitMaze=()=>{const bx=$('.mz-box'),sv=$('#mzSvg');if(!bx||!sv)return;const s=Math.max(160,Math.floor(Math.min(bx.clientWidth,bx.clientHeight)-18));sv.style.width=s+'px';sv.style.height=s+'px';};
+  fitMaze();watchFit(ctx,fitMaze);
   const svg=$('#mzSvg');let down=false,lastKey=start;
   const draw=()=>{$('#mzPath').setAttribute('points',path.map(([x,y])=>`${x*S+S/2},${y*S+S/2}`).join(' '));const [x,y]=path[path.length-1];const me=$('#mzMe');me.setAttribute('cx',x*S+S/2);me.setAttribute('cy',y*S+S/2);
     $('#mzStat').textContent=`${stars.length?`⭐ ${got.size}/${stars.length}　`:''}まよった回数 ${stray}`;};
