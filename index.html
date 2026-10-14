@@ -447,9 +447,17 @@ body.gaming .app{padding-block:8px}
 .sh-need li{background:var(--surface-2);border-radius:10px;padding:4px 12px;font-weight:700;display:flex;gap:6px}
 .sh-need li.on{background:var(--good-soft)}
 .sh-need li.on span{color:var(--good)}
-.sh-sum{display:flex;justify-content:space-between;gap:10px;background:var(--surface-2);border-radius:12px;padding:8px 12px;font-variant-numeric:tabular-nums}
+.sh-sum{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;background:var(--surface-2);border-radius:12px;padding:8px 12px;font-variant-numeric:tabular-nums}
 .sh-sum b{font-family:var(--font-display);font-size:1.4rem}
 .sh-sum.over{background:var(--bad-soft)}
+.sh-sum small{font-size:.75rem;color:var(--good);font-weight:700}
+.sh-sec{display:flex;flex-direction:column;gap:4px}
+.sh-sec>b{font-size:.85rem;color:var(--muted)}
+.sh-need.wish li{background:var(--accent-soft)}
+.sh-need.wish li.on{background:var(--good-soft)}
+.sh-cnt{font-size:.95rem;margin:0}
+@media (max-width:759px){.sh-memo{max-height:42%;overflow-y:auto;-webkit-overflow-scrolling:touch}.sh-sum{padding:4px 10px;gap:2px 10px}}
+.sh-cnt b{font-family:var(--font-display);font-size:1.2rem}
 .sh-sum.over span:first-child b{color:var(--bad)}
 .sh-shelf{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;background:var(--surface);border-radius:20px;padding:10px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:6px}
 .sh-row{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr) minmax(0,1fr);gap:6px;align-items:center;border-radius:12px;padding:2px 4px}
@@ -634,7 +642,7 @@ select{font:inherit;min-height:52px;border-radius:12px;border:2px solid var(--li
       <li><b>いろ？かたち？（切り替え）</b>：合図に応じて色と形の判断を切り替える課題切り替え（task switching）課題です。</li>
       <li><b>いろよみ（がまん）</b>：文字を読まずにインクの色を答えるストループ課題です。</li>
       <li><b>めいろ（計画）</b>：Porteus迷路検査の考え方を取り入れ、なぞる前に道を見通す力をみます。行き止まりに入った回数を「まよった回数」として数えます。迷路はレベルに合わせて6×6〜12×12マスで、スタートとゴールを最も遠い2点に置き、正解の道の途中に奥まで続く分かれ道が多いものを選んで出します。レベル4以上は⭐を取ってからゴールする寄り道があり、目標を小分けにして計画する練習になります。</li>
-      <li><b>おかいもの（段取り）</b>：メモ・ルール・予算という複数の条件を同時に守って品物をそろえる、Multiple Errands Testに近い買い物課題です。合計金額は自動で表示するので、計算の力には左右されにくくしています。</li>
+      <li><b>おかいもの（段取り）</b>：「かならず買う物」をそろえたうえで、予算の中で「できれば買いたい物」をなるべくたくさん買う課題です。量の指定・どちらか1つ・セット割などのルールも加わり、Multiple Errands Testのように複数の条件を同時に守りながら、何を優先し何をあきらめるかを計画します。レベル2以上は、メモの順に安いほうを入れていくだけでは最大数に届かない問題を出します。合計とのこりの金額は自動で表示するので、計算の力には左右されにくくしています。</li>
       <li><b>かずの切りかえ（切り替え）</b>：同じ数字を、合図によって「大きさ」と「きすう・ぐうすう」で判断し分ける課題切り替え課題です。</li>
       <li><b>はんたいタッチ（がまん）</b>：矢印と反対の向きを押すアンチ反応課題です。レベル2以上は矢印が左右にずれて出るため（サイモン効果）、つられて押しそうになる反応をおさえる力が求められます。</li>
       <li>レベルは個別のゲームとは別に、課題ごとに自動で上下します（★3で上、★1で下）。開始時のレベルは、個別ゲームのレベルを引き継ぎます。</li>
@@ -755,7 +763,7 @@ const REFLS={
   errand:L=>L===1?['地図をタッチする前に、全部の場所をさがす','近い場所をまとめて回る','地図全体を見わたす','出発前に道順を見直す']
     :['先にルールを読む','最初と最後に行く場所から決める','地図全体を見わたす','出発前にルールと計画を見くらべる'],
   sched:L=>['ルールをぜんぶ読んでから始める','時間が決まっている予定を先に入れる','「すぐあと」の組を先に決める','確認の前に、ルールを1つずつ見直す'],
-  shop:L=>[L>=3?'ルールで決まった品物を先に選ぶ':'メモを先にぜんぶ読む','メモとかごの中身を見くらべる','合計と予算を確かめる','レジの前に見直す'],
+  shop:L=>['かならず買う物を先に入れる','安いほうを選んで、品物の数を増やす',L>=4?'セット割を使えるか考える':L>=2?'ルールで決まった品物を先に選ぶ':'のこりのお金を見て、次に買う物を決める','レジの前に、のこりのお金でもう1つ買えないか見直す'],
   trail:L=>['次の目標を目でさがしてから押す',L===1?'ひとつ前の数字を覚えておく':'「数字の番・かなの番」と声に出す','速さより正確さを大事にする','まちがえたら、一度とまって確かめる'],
   cshape:L=>['合図を見てから、形や色を見る','心の中で「いろ」「かたち」ととなえる',L===1?'ルールが変わったら、新しいルールを言葉にする':'合図が変わったら一息おく','速さより正確さを大事にする'],
   numsw:L=>['合図を見てから、数字を見る','心の中でルールをとなえる',L===1?'ルールが変わったら、新しいルールを言葉にする':'合図が変わったら一息おく','速さより正確さを大事にする'],
@@ -1475,44 +1483,93 @@ const SHOP=[
   {c:'牛乳',i:'🥛',o:[['1L',300],['500mL',200]]},{c:'食パン',i:'🍞',o:[['8枚',300],['4枚',200]]},{c:'たまご',i:'🥚',o:[['10個',300],['6個',200]]},
   {c:'りんご',i:'🍎',o:[['3こ',400],['1こ',100]]},{c:'バナナ',i:'🍌',o:[['1ふさ',300],['2本',100]]},{c:'お茶',i:'🍵',o:[['大',200],['小',100]]},
   {c:'魚',i:'🐟',o:[['2切れ',400],['1切れ',200]]},{c:'肉',i:'🥩',o:[['大',600],['小',300]]},{c:'キャベツ',i:'🥬',o:[['1玉',300],['半分',200]]},
-  {c:'チーズ',i:'🧀',o:[['大',400],['小',200]]},{c:'にんじん',i:'🥕',o:[['3本',300],['1本',100]]},{c:'ヨーグルト',i:'🍶',o:[['大',300],['小',100]]}
+  {c:'チーズ',i:'🧀',o:[['大',400],['小',200]]},{c:'にんじん',i:'🥕',o:[['3本',300],['1本',100]]},{c:'ヨーグルト',i:'🍶',o:[['大',300],['小',100]]},
+  {c:'おにぎり',i:'🍙',o:[['3こ',300],['1こ',100]]},{c:'ケーキ',i:'🍰',o:[['ホール',800],['1切れ',300]]}
 ];
+const SHOP_PAIRS=[['牛乳','ヨーグルト','朝ごはん用に'],['食パン','おにぎり','お昼ごはん用に'],['魚','肉','今夜のおかずに'],['りんご','バナナ','くだものは'],['キャベツ','にんじん','野菜は']];
+/* L:必ず買う数 / どちらか1つ / できれば買いたい数 / 量の指定 / セット割 / 「できれば」をいくつ残すか */
+const SHOP_CFG=[{req:2,either:0,wish:3,forced:0,coupon:0,miss:1},{req:2,either:0,wish:4,forced:1,coupon:0,miss:1},{req:2,either:1,wish:4,forced:1,coupon:0,miss:2},
+  {req:2,either:1,wish:4,forced:1,coupon:1,miss:1},{req:2,either:1,wish:5,forced:2,coupon:1,miss:2}];
+/* かごの中身を評価する（合計・セット割・ルール違反・「できれば」の数） */
+function shopEval(P,cart){
+  const byC=P.byC;let tot=Object.keys(cart).reduce((a,c)=>a+byC[c].o[cart[c]][1],0);
+  const cp=P.coupon&&P.coupon.a in cart&&P.coupon.b in cart;if(cp)tot-=P.coupon.off;
+  const probs=[],bad=new Set();
+  P.req.forEach(x=>{if(!(x.c in cart)){probs.push(`${x.c}は、かならず買う品物です`);bad.add(x.c);}});
+  if(P.either){const n=P.either.cats.filter(c=>c in cart).length;if(n===0){probs.push(`${P.either.cats.join('か')}の、どちらか1つを買いましょう`);P.either.cats.forEach(c=>bad.add(c));}
+    else if(n===2){probs.push(`${P.either.cats.join('と')}は、どちらか1つだけです`);P.either.cats.forEach(c=>bad.add(c));}}
+  Object.keys(cart).forEach(c=>{if(!P.listed.has(c)){probs.push(`${c}はメモにありません`);bad.add(c);}});
+  P.forced.forEach(r=>{if(r.c in cart&&cart[r.c]!==r.oi){probs.push(`${r.c}は「${byC[r.c].o[r.oi][0]}」と決まっています`);bad.add(r.c);}});
+  if(tot>P.budget)probs.push(`予算を ${tot-P.budget}円 こえています`);
+  const wish=P.wish.filter(x=>x.c in cart).length;
+  return{tot,cp,probs,bad,wish};
+}
 function shopProblem(L){
-  const cf=[{n:3,r:0,sl:1000,d:2},{n:3,r:0,sl:100,d:2},{n:4,r:1,sl:100,d:2},{n:4,r:2,sl:0,d:3},{n:5,r:2,sl:0,d:3}][L-1];
-  const cats=shuffle(SHOP).slice(0,cf.n+cf.d),need=cats.slice(0,cf.n),dis=cats.slice(cf.n);
-  const rules=shuffle(need).slice(0,cf.r).map(x=>({c:x.c,oi:0,text:`${x.c}は「${x.o[0][0]}」を買う（家族が多いので）`}));
-  const forced={};rules.forEach(r=>forced[r.c]=r.oi);
-  const min=need.reduce((a,x)=>a+(x.c in forced?x.o[forced[x.c]][1]:Math.min(x.o[0][1],x.o[1][1])),0);
-  return{need,dis,rules,budget:min+cf.sl,shelf:shuffle(cats),forced};
+  const cf=SHOP_CFG[L-1];
+  for(let t=0;t<300;t++){
+    const pair=cf.either?pick(SHOP_PAIRS):null;
+    const pool=shuffle(SHOP.filter(x=>!pair||!pair.slice(0,2).includes(x.c)));
+    const req=pool.slice(0,cf.req),wish=pool.slice(cf.req,cf.req+cf.wish),dis=pool.slice(cf.req+cf.wish,cf.req+cf.wish+2);
+    const eitherCats=pair?SHOP.filter(x=>pair.slice(0,2).includes(x.c)):[];
+    const byC={};SHOP.forEach(x=>byC[x.c]=x);
+    const forced=shuffle(req).slice(0,cf.forced).map(x=>({c:x.c,oi:0,text:`${x.c}は「${x.o[0][0]}」を買う（家族が多いので）`}));
+    let coupon=null;if(cf.coupon){const two=shuffle(req.concat(wish)).slice(0,2);coupon={a:two[0].c,b:two[1].c,off:100,text:`${two[0].c}と${two[1].c}を両方買うと、100円引き（セット割）`};}
+    const P={req,wish,dis,byC,forced,coupon,either:pair?{cats:pair.slice(0,2),text:`${pair[2]}、${pair[0]}か${pair[1]}のどちらか1つ`}:null,
+      listed:new Set(req.concat(wish,eitherCats).map(x=>x.c)),shelf:shuffle(req.concat(wish,eitherCats,dis)),budget:1e9};
+    // すべての買い方を調べて、「できれば」をk個買うのに必要な最小金額を求める
+    const fo={};forced.forEach(r=>fo[r.c]=r.oi);
+    const reqOpts=req.map(x=>x.c in fo?[fo[x.c]]:[0,1]);
+    const eOpts=pair?[[pair[0],0],[pair[0],1],[pair[1],0],[pair[1],1]]:[null];
+    const minC={},bestCart={};
+    const rec=(i,cart)=>{
+      if(i<req.length){for(const o of reqOpts[i]){cart[req[i].c]=o;rec(i+1,cart);}delete cart[req[i].c];return;}
+      const j=i-req.length;
+      if(j<wish.length){rec(i+1,cart);for(const o of [0,1]){cart[wish[j].c]=o;rec(i+1,cart);}delete cart[wish[j].c];return;}
+      for(const e of eOpts){const c2=Object.assign({},cart);if(e)c2[e[0]]=e[1];
+        const r=shopEval(P,c2);if(r.probs.length)continue;const k=r.wish;if(!(k in minC)||r.tot<minC[k]){minC[k]=r.tot;bestCart[k]=c2;}}
+    };
+    rec(0,{});
+    const k=cf.wish-cf.miss;if(!(k in minC)||!(k+1 in minC))continue;
+    const lo=minC[k],hi=minC[k+1]-100;if(hi<lo)continue;
+    // 安いほうだけを選べば買える、ではなく「何をあきらめるか」を考えないと届かない予算にする
+    P.budget=lo+100*Math.floor(Math.random()*((hi-lo)/100+1));
+    P.target=k;P.answer=bestCart[k];
+    // レベル2以上：「メモの順に、小さいほうを入れていく」だけでは届かない問題にする（何をあきらめるかを考えさせる）
+    if(L>=2&&t<250){const c=Object.assign({},P.answer);P.wish.forEach(x=>delete c[x.c]);
+      for(const x of P.wish){c[x.c]=1;if(shopEval(P,c).tot>P.budget)delete c[x.c];}
+      if(shopEval(P,c).wish>=P.target)continue;}
+    return P;
+  }
 }
 function runShop(ctx){
   const P=shopProblem(ctx.level);let cart={},checks=0,lock=false,msg='',bad=null;
-  const byC={};P.shelf.forEach(x=>byC[x.c]=x);
-  const total=()=>Object.keys(cart).reduce((a,c)=>a+byC[c].o[cart[c]][1],0);
   render();
   function render(){
-    const tot=total(),over=tot>P.budget;
+    const r=shopEval(P,cart),left=P.budget-r.tot;
     const sc=$('#shShelf');const top=sc?sc.scrollTop:0;
+    const li=x=>`<li class="${x.c in cart?'on':''}"><span>${x.c in cart?'✓':'・'}</span>${x.i} ${x.c}</li>`;
+    const rules=[...P.forced.map(f=>f.text),...(P.coupon?[P.coupon.text]:[])];
     ctx.area.innerHTML=`<div class="shop"><div class="sh-memo"><h3>かいものメモ</h3>
-      <ul class="sh-need">${P.need.map(x=>`<li class="${x.c in cart?'on':''}"><span>${x.c in cart?'✓':'・'}</span>${x.i} ${x.c}</li>`).join('')}</ul>
-      ${P.rules.length?`<ul class="sl-rules">${P.rules.map(r=>`<li><span class="mk">・</span><span>${r.text}</span></li>`).join('')}</ul>`:''}</div>
+      <div class="sh-sec"><b>かならず買う</b><ul class="sh-need">${P.req.map(li).join('')}${P.either?`<li class="${P.either.cats.some(c=>c in cart)?'on':''}"><span>${P.either.cats.some(c=>c in cart)?'✓':'・'}</span>${P.either.cats.map(c=>P.byC[c].i+' '+c).join(' か ')}</li>`:''}</ul></div>
+      <div class="sh-sec"><b>できれば買いたい（予算の中で、なるべくたくさん）</b><ul class="sh-need wish">${P.wish.map(li).join('')}</ul></div>
+      ${rules.length?`<ul class="sl-rules">${rules.map(t=>`<li><span class="mk">・</span><span>${t}</span></li>`).join('')}</ul>`:''}</div>
       <div class="sh-shelf" id="shShelf">${P.shelf.map(x=>`<div class="sh-row ${bad&&bad.has(x.c)?'bad':''}"><span class="sh-name">${x.i} ${x.c}</span>${x.o.map((o,j)=>`<button class="sh-item" data-c="${x.c}" data-o="${j}" aria-pressed="${cart[x.c]===j}">${o[0]}<b>${o[1]}円</b></button>`).join('')}</div>`).join('')}</div>
-      <div class="sh-foot"><div class="sh-sum ${over?'over':''}"><span>合計 <b>${tot}</b> 円</span><span>予算 <b>${P.budget}</b> 円</span></div>
+      <div class="sh-foot"><div class="sh-sum ${left<0?'over':''}"><span>合計 <b>${r.tot}</b> 円${r.cp?'<small>（セット割）</small>':''}</span><span>予算 <b>${P.budget}</b> 円</span><span>のこり <b>${left}</b> 円</span></div>
+      <p class="sh-cnt">できれば買いたい物：<b>${r.wish}</b> / ${P.wish.length} こ</p>
       ${msg?`<p class="sl-msg">${msg}</p>`:''}<button class="btn primary" data-act="pay" ${lock||!Object.keys(cart).length?'disabled':''}>レジへ</button></div></div>`;
     $('#shShelf').scrollTop=top;
   }
+  const fin=(stars,rev)=>setTimeout(()=>{if(!ctx.dead())ctx.finish({stars,summary:`確認${checks}回${rev?'（答えを見た）':''}`,details:[['レジに行った回数',`${checks} 回`],['できれば買いたい物（最大）',`${P.target} こ`]]});},rev?3600:1300);
   ctx.area.onclick=e=>{
     if(lock)return;const it=e.target.closest('[data-c]'),a=e.target.closest('[data-act]');
     if(it){const c=it.dataset.c,o=+it.dataset.o;if(cart[c]===o){delete cart[c];SFX.drop();}else{cart[c]=o;SFX.pick();}bad=null;msg='';render();return;}
-    if(a){checks++;const probs=[],b=new Set();
-      P.need.forEach(x=>{if(!(x.c in cart)){probs.push(`${x.c}をまだ買っていません`);b.add(x.c);}});
-      Object.keys(cart).forEach(c=>{if(!P.need.some(x=>x.c===c)){probs.push(`${c}はメモにありません`);b.add(c);}});
-      P.rules.forEach(r=>{if(r.c in cart&&cart[r.c]!==r.oi){probs.push(`${r.c}は「${byC[r.c].o[r.oi][0]}」です`);b.add(r.c);}});
-      if(total()>P.budget)probs.push(`予算を ${total()-P.budget}円 こえています`);
-      if(!probs.length){lock=true;msg='お会計できました！';SFX.good();render();setTimeout(()=>{if(!ctx.dead())ctx.finish({stars:slotStars(checks,false),summary:`確認${checks}回`,details:[['レジに行った回数',`${checks} 回`]]});},1300);return;}
-      SFX.bad();
-      if(checks>=3){lock=true;cart={};P.need.forEach(x=>{cart[x.c]=x.c in P.forced?P.forced[x.c]:(x.o[0][1]<=x.o[1][1]?0:1);});bad=null;msg='正しい買い方の一例はこうです。';render();setTimeout(()=>{if(!ctx.dead())ctx.finish({stars:1,summary:`確認${checks}回`,details:[['レジに行った回数',`${checks} 回`]]});},3200);return;}
-      bad=b;msg=probs[0];render();say(probs[0]);}
+    if(!a)return;
+    checks++;const r=shopEval(P,cart);let m=r.probs[0];
+    if(!m&&r.wish<P.target)m=`予算の中で、できれば買いたい物を あと${P.target-r.wish}こ 多く買えます。組み合わせを見直しましょう`;
+    if(!m){lock=true;msg=`お会計できました！ できれば買いたい物を ${r.wish}こ 買えました`;SFX.good();render();fin(slotStars(checks,false),false);return;}
+    SFX.bad();
+    if(checks>=3){lock=true;cart=Object.assign({},P.answer);bad=null;msg=`買い方の一例はこうです。できれば買いたい物は、最大 ${P.target}こ 買えます。`;render();fin(1,true);return;}
+    bad=r.bad;msg=m;render();say(m);
   };
 }
 
@@ -1589,7 +1646,7 @@ const MT={
   gonogo:{fn:'inh',name:'ゴー・ストップ',base:'gonogo',run:runGonogo,rule:L=>L>=3?'くだものはタッチ、やさいはがまん。とちゅうでルールが変わります。':'くだものはタッチ、やさいはがまんします。'},
   stroop:{fn:'inh',name:'いろよみ',base:'gonogo',run:runStroop,rule:()=>'文字は読まずに、文字の「色」をボタンで答えます。'},
   maze:{fn:'plan',name:'めいろ',base:'tower',run:runMaze,rule:L=>L>=4?`🏠から、⭐を${L===5?'2つ':''}取ってから🏁まで、指で道をなぞります。なぞる前に、回る順番を目でたどりましょう。`:'🏠から🏁まで、指で道をなぞります。なぞる前に、目でゴールまでたどりましょう。'},
-  shop:{fn:'seq',name:'おかいもの',base:'errand',run:runShop,rule:L=>L>=3?'メモの品物を、ルールと予算を守ってそろえます。':'メモの品物を、予算の中でそろえます。'},
+  shop:{fn:'seq',name:'おかいもの',base:'errand',run:runShop,rule:L=>`「かならず買う物」をそろえたうえで、予算の中で「できれば買いたい物」をなるべくたくさん買います。${L>=2?'ルールも守りましょう。':''}`},
   numsw:{fn:'sw',name:'かずの切りかえ',base:'trail',run:runNumSw,rule:()=>'上の合図に合わせて、「5より大きいか」か「きすう・ぐうすう」かで答えます。'},
   anti:{fn:'inh',name:'はんたいタッチ',base:'gonogo',run:runAnti,rule:L=>L>=4?'赤い矢印は はんたいの向き、緑の矢印は 同じ向きのボタンを押します。':'矢印と はんたいの向きのボタンを押します。'}
 };
@@ -1716,8 +1773,8 @@ const EXTRA={
     tip:()=>'なぞる前に、目でゴールまで道をたどりましょう。ゴールから逆にたどるのもコツです。',life:'出かける前に、地図で道順を確かめてから出発する。'},
   sched:{desc:'ルールに合う1日の予定を組む',reps:3,goal:()=>'ルールに合うように、1日の予定を時間にあてはめます。3問あります。',
     tip:()=>'ルールをぜんぶ読んでから、時間が決まっている予定を先に入れましょう。',life:'1日の予定は、時間が決まっているものから先に書き出して組み立てる。'},
-  shop:{desc:'メモ・ルール・予算を守って買う',reps:3,goal:L=>`メモの品物を、${L>=3?'ルールと':''}予算を守ってそろえます。3問あります。`,
-    tip:()=>'ルールで決まっている品物を先に選び、残りを予算に合わせて選びましょう。',life:'買い物の前に、買うものと予算をメモに書いてから出かける。'},
+  shop:{desc:'予算内で、なるべくたくさん買う',reps:3,goal:L=>`「かならず買う物」をそろえたうえで、予算の中で「できれば買いたい物」をなるべくたくさん買います。${L>=2?'ルールも守ります。':''}3問あります。`,
+    tip:()=>'まず「かならず買う物」を入れ、のこりのお金で「できれば買いたい物」を安いほうから選びましょう。高い物を1つあきらめると、ほかの物を2つ買えることもあります。',life:'買い物の前に、必ず買う物と、余裕があれば買う物を分けてメモし、予算を決めてから出かける。'},
   cshape:{desc:'合図で「色」と「形」を切り替える',reps:2,goal:()=>'合図が「いろ」なら色で、「かたち」なら形でボタンを選びます。12回を2セット行います。',
     tip:()=>'合図を見たら、心の中で「いろ」「かたち」ととなえてから選びましょう。',life:'2つの用事を行き来するとき、「今はどちらの番か」を言葉にしてから動く。'},
   numsw:{desc:'合図で「大きさ」と「きすう・ぐうすう」を切り替える',reps:2,goal:()=>'合図に合わせて、「5より大きいか」か「きすう・ぐうすう」かで答えます。12回を2セット行います。',
