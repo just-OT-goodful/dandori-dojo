@@ -93,7 +93,7 @@ button{font:inherit;color:inherit;touch-action:manipulation;cursor:pointer;-webk
 .games{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 @media (max-width:1000px){.games{grid-template-columns:1fr}}
 .gcard{display:grid;grid-template-columns:72px minmax(0,1fr);gap:14px;align-items:center;text-align:left;background:var(--surface);border:3px solid transparent;border-radius:22px;padding:16px;box-shadow:var(--shadow);min-height:120px;transition:transform .1s,border-color .15s}
-.gcard:hover{border-color:var(--primary-soft)}
+@media (hover:hover){.gcard:hover{border-color:var(--primary-soft)}}
 .gcard:active{transform:scale(.985)}
 .gicon{width:88px;height:88px;border-radius:20px;background:var(--surface-2);display:grid;place-items:center}
 .gicon svg{width:64px;height:64px}
@@ -379,7 +379,7 @@ body.gaming .app{padding-block:8px}
 .sl-card.placed{border-color:var(--primary);background:var(--primary-soft)}
 .sl-card.bad{border-color:var(--bad);background:var(--bad-soft)}
 .sl-card.good{border-color:var(--good);background:var(--good-soft)}
-.sl-card .ic{font-size:1.5rem}
+.sl-card .ic{font-size:2.2rem;line-height:1}
 .sl-pool{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
 .sl-msg{font-weight:700;min-height:1.5em}
 .sl-col .btn{width:100%;padding-inline:10px}
@@ -444,7 +444,11 @@ body.gaming .app{padding-block:8px}
 .sh-foot .btn{width:100%;min-height:56px}
 .sh-memo h3{font-size:1.2rem;font-weight:900}
 .sh-need{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
-.sh-need li{background:var(--surface-2);border-radius:10px;padding:4px 12px;font-weight:700;display:flex;gap:6px}
+.sh-need li{background:var(--surface-2);border-radius:10px;padding:4px 12px;font-weight:700;display:flex;align-items:center;gap:6px;font-size:1.05rem}
+.ei{font-size:1.7em;line-height:1;margin-right:2px}
+.ka{font-weight:400;color:var(--muted);margin-inline:4px}
+.nw{white-space:nowrap;display:inline-flex;align-items:center}
+.nwg{display:inline-flex;flex-wrap:wrap;align-items:center;row-gap:4px}
 .sh-need li.on{background:var(--good-soft)}
 .sh-need li.on span{color:var(--good)}
 .sh-sum{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;background:var(--surface-2);border-radius:12px;padding:8px 12px;font-variant-numeric:tabular-nums}
@@ -462,9 +466,11 @@ body.gaming .app{padding-block:8px}
 .sh-shelf{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;background:var(--surface);border-radius:20px;padding:10px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:6px}
 .sh-row{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr) minmax(0,1fr);gap:6px;align-items:center;border-radius:12px;padding:2px 4px}
 .sh-row.bad{background:var(--bad-soft)}
-.sh-name{font-weight:700;overflow-wrap:anywhere}
+.sh-name{font-weight:700;overflow-wrap:anywhere;display:flex;align-items:center;gap:8px;font-size:1.1rem;line-height:1.25}
+.sh-ico{font-size:2.6rem;line-height:1;flex:none}
 .sh-item{min-height:54px;border-radius:12px;border:3px solid var(--line);background:var(--surface-2);font-weight:700;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.25;padding:2px 4px}
-.sh-item b{font-size:.9rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.sh-item b{font-size:1rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.sh-item{font-size:1.1rem;min-height:64px}
 .sh-item[aria-pressed="true"]{border-color:var(--primary);background:var(--primary-soft)}
 .sh-item[aria-pressed="true"] b{color:var(--ink)}
 @media (max-width:600px){.sh-name{font-size:.92rem}.sh-item{font-size:.92rem;min-height:48px}.sh-memo h3{font-size:1rem}.sh-need li{padding:2px 10px;font-size:.95rem}.sh-memo .sl-rules li{font-size:.9rem;padding:4px 10px}.sh-sum{padding:4px 12px}.sh-sum b{font-size:1.2rem}}
@@ -523,6 +529,23 @@ select{font:inherit;min-height:52px;border-radius:12px;border:2px solid var(--li
 .prose ul{margin:0;padding-left:1.3em;display:flex;flex-direction:column;gap:8px}
 .prose .ref{font-size:.92rem;color:var(--muted)}
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+
+/* ---------- タブレット（iPad）向け：文字・絵・見本を大きく ---------- */
+@media (min-width:700px){
+  html{font-size:18px}
+  .tgoal .pegs.mini{--b:42px;gap:8px}
+  .tgoal{padding:10px 16px}
+  .pv-tower .pegs.mini{--b:40px}
+  .mz-emo{font-size:7.5px}
+  .lvbadge{font-size:1rem}
+  .todo .tname{font-size:1.1rem}
+}
+@media (min-width:700px) and (max-width:1000px){
+  .games{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .gcard{grid-template-columns:1fr;justify-items:center;text-align:center;padding:16px 12px}
+  .gcard .glv{flex-wrap:wrap;justify-content:center}
+  .gcard .glast{margin-left:0;width:100%}
+}
 </style>
 
 </head>
@@ -929,7 +952,7 @@ function pegsHTML(s,mini,held){
 /* 盤面の実際の大きさを測って、ボールと棒の大きさをpxで決める（Safariでも同じ見た目にするため） */
 function fitTower(){const bd=$('#tboard');if(!bd)return;const pg=bd.querySelector('.pegs'),ft=bd.querySelector('.tfoot');if(!pg)return;
   const W=bd.clientWidth-24,H=bd.clientHeight-24-(ft?ft.offsetHeight+10:0);
-  const b=Math.max(30,Math.floor(Math.min((W-78)/3.6,(H-34)/3.6,110)));
+  const b=Math.max(30,Math.floor(Math.min((W-78)/3.6,(H-34)/3.6,140)));
   pg.style.setProperty('--b',b+'px');pg.style.gap=Math.round(b*.3)+'px';}
 function watchFit(ctx,fn){try{const ro=new ResizeObserver(()=>{if(ctx.dead()){ro.disconnect();return;}fn();});ro.observe(ctx.area);}catch(e){}
   const h=()=>{if(ctx.dead()){window.removeEventListener('resize',h);return;}setTimeout(fn,60);};window.addEventListener('resize',h);window.addEventListener('orientationchange',h);}
@@ -1062,7 +1085,7 @@ function runErrand(ctx){
       document.querySelectorAll('#nodes .node').forEach(n=>n.classList.toggle('picked',order.includes(n.dataset.place)));
     }
     function memoPlan(){
-      $('#memo').innerHTML=`<h3>やることメモ</h3><ul class="todo">${P.targets.map(t=>{const k=order.indexOf(t.id);return `<li class="${k>=0?'on':''}"><span class="ord">${k>=0?k+1:''}</span><span class="tname">${t.icon} ${t.name}</span><span class="ttask">${t.task}</span></li>`;}).join('')}</ul>
+      $('#memo').innerHTML=`<h3>やることメモ</h3><ul class="todo">${P.targets.map(t=>{const k=order.indexOf(t.id);return `<li class="${k>=0?'on':''}"><span class="ord">${k>=0?k+1:''}</span><span class="tname"><span class="ei">${t.icon}</span>${t.name}</span><span class="ttask">${t.task}</span></li>`;}).join('')}</ul>
       ${P.rules.length?`<h3>ルール</h3><ul class="rules">${P.rules.map(r=>`<li>${r.text}</li>`).join('')}</ul>`:'<p class="hint">ルールはありません。近い順に回りましょう。</p>'}
       <p class="hint">家から出発して、行く順番に地図の場所をタッチします。最後は自動で家に帰ります。</p>
       <div class="memo-actions"><button class="btn ghost" data-act="undo" ${order.length?'':'disabled'}>ひとつ戻す</button><button class="btn ghost" data-act="clear" ${order.length?'':'disabled'}>ぜんぶ消す</button><button class="btn primary wide" data-act="check" ${order.length===P.targets.length?'':'disabled'}>この順番で出発</button></div>`;
@@ -1547,13 +1570,13 @@ function runShop(ctx){
   function render(){
     const r=shopEval(P,cart),left=P.budget-r.tot;
     const sc=$('#shShelf');const top=sc?sc.scrollTop:0;
-    const li=x=>`<li class="${x.c in cart?'on':''}"><span>${x.c in cart?'✓':'・'}</span>${x.i} ${x.c}</li>`;
+    const li=x=>`<li class="${x.c in cart?'on':''}"><span>${x.c in cart?'✓':'・'}</span><span class="ei">${x.i}</span>${x.c}</li>`;
     const rules=[...P.forced.map(f=>f.text),...(P.coupon?[P.coupon.text]:[])];
     ctx.area.innerHTML=`<div class="shop"><div class="sh-memo"><h3>かいものメモ</h3>
-      <div class="sh-sec"><b>かならず買う</b><ul class="sh-need">${P.req.map(li).join('')}${P.either?`<li class="${P.either.cats.some(c=>c in cart)?'on':''}"><span>${P.either.cats.some(c=>c in cart)?'✓':'・'}</span>${P.either.cats.map(c=>P.byC[c].i+' '+c).join(' か ')}</li>`:''}</ul></div>
+      <div class="sh-sec"><b>かならず買う</b><ul class="sh-need">${P.req.map(li).join('')}${P.either?`<li class="${P.either.cats.some(c=>c in cart)?'on':''}"><span>${P.either.cats.some(c=>c in cart)?'✓':'・'}</span><span class="nwg">${P.either.cats.map(c=>`<span class="nw"><span class="ei">${P.byC[c].i}</span>${c}</span>`).join('<span class="ka">か</span>')}</span></li>`:''}</ul></div>
       <div class="sh-sec"><b>できれば買いたい（予算の中で、なるべくたくさん）</b><ul class="sh-need wish">${P.wish.map(li).join('')}</ul></div>
       ${rules.length?`<ul class="sl-rules">${rules.map(t=>`<li><span class="mk">・</span><span>${t}</span></li>`).join('')}</ul>`:''}</div>
-      <div class="sh-shelf" id="shShelf">${P.shelf.map(x=>`<div class="sh-row ${bad&&bad.has(x.c)?'bad':''}"><span class="sh-name">${x.i} ${x.c}</span>${x.o.map((o,j)=>`<button class="sh-item" data-c="${x.c}" data-o="${j}" aria-pressed="${cart[x.c]===j}">${o[0]}<b>${o[1]}円</b></button>`).join('')}</div>`).join('')}</div>
+      <div class="sh-shelf" id="shShelf">${P.shelf.map(x=>`<div class="sh-row ${bad&&bad.has(x.c)?'bad':''}"><span class="sh-name"><span class="sh-ico">${x.i}</span><span>${x.c}</span></span>${x.o.map((o,j)=>`<button class="sh-item" data-c="${x.c}" data-o="${j}" aria-pressed="${cart[x.c]===j}">${o[0]}<b>${o[1]}円</b></button>`).join('')}</div>`).join('')}</div>
       <div class="sh-foot"><div class="sh-sum ${left<0?'over':''}"><span>合計 <b>${r.tot}</b> 円${r.cp?'<small>（セット割）</small>':''}</span><span>予算 <b>${P.budget}</b> 円</span><span>のこり <b>${left}</b> 円</span></div>
       <p class="sh-cnt">できれば買いたい物：<b>${r.wish}</b> / ${P.wish.length} こ</p>
       ${msg?`<p class="sl-msg">${msg}</p>`:''}<button class="btn primary" data-act="pay" ${lock||!Object.keys(cart).length?'disabled':''}>レジへ</button></div></div>`;
