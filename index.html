@@ -182,7 +182,7 @@ button{font:inherit;color:inherit;touch-action:manipulation;cursor:pointer;-webk
 .area>:not(.overlay):not(.count):not(.toast),.msub>:not(.overlay):not(.count){position:absolute;top:0;right:0;bottom:0;left:0;height:auto}
 .area input,.area textarea{-webkit-user-select:text;user-select:text}
 body.gaming .app{padding-top:8px;padding-bottom:8px}
-#scr-game{grid-gap:8px;gap:8px;height:calc(100vh - 16px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));height:calc(var(--app-h,100vh) - 16px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));height:calc(100dvh - 16px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));min-height:460px}
+#scr-game{grid-gap:8px;gap:8px;height:calc(100vh - 16px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));height:calc(var(--app-h,100vh) - 16px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));min-height:460px}
 #scr-game .gbar{position:static;padding-top:0;padding-bottom:0}
 @media (max-width:600px){.gtitle{font-size:1.15rem;grid-gap:8px;gap:8px}.lvbadge{font-size:.8rem;padding:2px 10px}.gprog{font-size:.95rem}}
 .sheet>*,.memo>*{flex-shrink:0}
@@ -191,7 +191,7 @@ body.gaming .app{padding-top:8px;padding-bottom:8px}
 .count span.go{font-size:72px;color:var(--accent)}
 @keyframes pop{0%{transform:scale(.4);opacity:0}100%{transform:scale(1);opacity:1}}
 .overlay{position:fixed;top:0;right:0;bottom:0;left:0;background:var(--veil);display:grid;place-items:center;z-index:50;padding:16px}
-.sheet{background:var(--surface);border-radius:24px;padding:26px;max-width:640px;width:100%;box-shadow:var(--shadow);display:flex;flex-direction:column;grid-gap:14px;gap:14px;max-height:92vh;max-height:92dvh;overflow:auto}
+.sheet{background:var(--surface);border-radius:24px;padding:26px;max-width:640px;width:100%;box-shadow:var(--shadow);display:flex;flex-direction:column;grid-gap:14px;gap:14px;max-height:92vh;max-height:calc(var(--vh,1vh)*92);max-height:92dvh;overflow:auto}
 .sheet h3{font-size:1.6rem;font-weight:900}
 .wait{display:inline-block;background:var(--stop);color:var(--stop-ink);border-radius:12px;padding:4px 14px;font-family:var(--font-display);font-weight:900;align-self:flex-start}
 .chk{display:flex;grid-gap:14px;gap:14px;align-items:center;text-align:left;padding:12px 16px;border:3px solid var(--line);border-radius:16px;background:var(--surface-2);min-height:68px;line-height:1.45}
@@ -232,7 +232,7 @@ body.gaming .app{padding-top:8px;padding-bottom:8px}
 .errand{height:100%;display:flex;flex-direction:column;grid-gap:10px;gap:10px}
 .map-wrap{flex:0 0 auto;min-height:0;display:flex;justify-content:center;align-items:center;background:var(--surface);border-radius:22px;padding:6px;box-shadow:var(--shadow)}
 .map{display:block;width:300px;height:216px}
-@media (min-width:900px) and (orientation:landscape){.errand{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(300px,1fr);grid-template-rows:minmax(0,1fr)}.map-wrap{height:auto;flex:none}}
+@media (min-width:900px) and (orientation:landscape){.errand{flex-direction:row}.map-wrap{flex:1.55 1 0px;min-width:0;height:auto}.errand>.memo{flex:1 1 0px;min-width:300px}}
 @media (max-width:600px){.memo{padding:14px}.todo li{padding:6px 10px}.rules li{padding:8px 12px}}
 .m-ground{fill:var(--map-ground)}
 .m-road{stroke:var(--road);stroke-width:22}
@@ -252,6 +252,8 @@ body.gaming .app{padding-top:8px;padding-bottom:8px}
 .walker{fill:var(--accent);stroke:var(--surface);stroke-width:5}
 .memo{flex:1 1 0;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;background:var(--surface);border-radius:22px;padding:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;grid-gap:12px;gap:12px;min-width:0}
 .memo h3{font-size:1.25rem;font-weight:900}
+@media (orientation:landscape) and (max-height:760px){.memo{padding:12px 14px;grid-gap:8px;gap:8px}.todo,.rules,.checks{grid-gap:6px;gap:6px}.todo li{padding:5px 10px}.rules li,.checks li{padding:6px 12px}}
+@media (orientation:portrait) and (min-width:700px){.memo .todo{display:grid;grid-template-columns:1fr 1fr}}
 .todo,.rules,.checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;grid-gap:8px;gap:8px}
 .todo li{display:grid;grid-template-columns:40px minmax(0,1fr);grid-column-gap:10px;column-gap:10px;align-items:center;background:var(--surface-2);border-radius:14px;padding:8px 12px}
 .todo .ord{grid-row:span 2;width:38px;height:38px;border-radius:50%;border:3px dashed var(--line);display:grid;place-items:center;font-weight:700}
@@ -303,7 +305,7 @@ body.gaming .app{padding-top:8px;padding-bottom:8px}
 .gng-rule{font-size:1.35rem;padding:12px 20px;border-radius:18px;text-align:center;background:var(--rule-bg);border:3px solid var(--rule);line-height:1.5}
 .gng-rule b{font-family:var(--font-display);font-size:1.7rem;font-weight:900}
 .gng-stage{position:relative;flex:1 1 auto;min-height:0;border-radius:30px;border:10px solid var(--rule);background:var(--surface);display:grid;place-items:center;width:100%;user-select:none;-webkit-user-select:none;touch-action:none}
-.gng-item{font-size:190px;font-size:clamp(120px,min(26vw,26vh),260px);font-size:clamp(120px,min(26vw,26dvh),260px);line-height:1;opacity:0;transform:scale(.7);transition:opacity .12s,transform .12s}
+.gng-item{font-size:190px;font-size:clamp(120px,min(26vw,26vh),260px);font-size:max(120px,min(26vw,calc(var(--vh,1vh)*26),260px));font-size:clamp(120px,min(26vw,26dvh),260px);line-height:1;opacity:0;transform:scale(.7);transition:opacity .12s,transform .12s}
 .gng-item.show{opacity:1;transform:none}
 .gng-fb{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);font-family:var(--font-display);font-weight:900;font-size:1.8rem;padding:4px 22px;border-radius:999px;opacity:0;transition:opacity .15s;white-space:nowrap}
 .gng-fb.on{opacity:1}
@@ -390,17 +392,20 @@ body.gaming .app{padding-top:8px;padding-bottom:8px}
 .rt-cue{font-family:var(--font-display);font-weight:900;font-size:2.2rem;font-size:clamp(1.6rem,6vw,2.4rem);text-align:center;border-radius:18px;padding:6px 12px;transition:background .15s}
 .rt-cue.c-color{background:var(--primary);color:var(--primary-ink)}
 .rt-cue.c-shape{background:var(--accent);color:var(--accent-ink)}
-.rt-stage{flex:1 1 auto;min-height:0;position:relative;border-radius:26px;background:var(--surface);box-shadow:var(--shadow);display:grid;place-items:center;border:8px solid var(--line)}
+.rt-stage{flex:1 1 auto;min-height:0;position:relative;border-radius:26px;background:var(--surface);box-shadow:var(--shadow);display:-webkit-box;display:flex;align-items:center;justify-content:center;border:8px solid var(--line)}
 .rt-stage.c-color{border-color:var(--primary)}
 .rt-stage.c-shape{border-color:var(--accent)}
-.rt-stage svg{width:230px;width:min(46vw,38vh,240px);width:min(46vw,38dvh,240px);height:auto}
+.rt-stage svg{width:230px;width:min(46vw,38vh,240px);width:min(46vw,calc(var(--vh,1vh)*38),240px);width:min(46vw,38dvh,240px);height:230px;height:min(46vw,38vh,240px);height:min(46vw,calc(var(--vh,1vh)*38),240px);height:min(46vw,38dvh,240px)}
 .rt-stage.dark{background:var(--stroop-bg);border-color:var(--stroop-bg)}
-.rt-word{font-family:var(--font-display);font-weight:900;font-size:150px;font-size:clamp(80px,min(22vw,20vh),190px);font-size:clamp(80px,min(22vw,20dvh),190px);line-height:1;opacity:0;transition:opacity .1s}
+.rt-word{font-family:var(--font-display);font-weight:900;font-size:150px;font-size:clamp(80px,min(22vw,20vh),190px);font-size:max(80px,min(22vw,calc(var(--vh,1vh)*20),190px));font-size:clamp(80px,min(22vw,20dvh),190px);line-height:1;opacity:0;transition:opacity .1s}
 .rt-word.show,.rt-stim.show{opacity:1}
 .rt-stim{opacity:0;transition:opacity .1s;display:grid;place-items:center}
-.rt-num{font-family:var(--font-display);font-weight:900;font-size:190px;font-size:clamp(110px,min(28vw,26vh),220px);font-size:clamp(110px,min(28vw,26dvh),220px);line-height:1;color:var(--ink)}
+.rt-num{font-family:var(--font-display);font-weight:900;font-size:190px;font-size:clamp(110px,min(28vw,26vh),220px);font-size:max(110px,min(28vw,calc(var(--vh,1vh)*26),220px));font-size:clamp(110px,min(28vw,26dvh),220px);line-height:1;color:var(--ink)}
 .an-stim{padding-left:6%;padding-right:6%}
-.an-stim svg{width:210px;width:min(40vw,30vh,220px);width:min(40vw,30dvh,220px)}
+.an-stim svg{width:210px;width:min(40vw,30vh,220px);width:min(40vw,calc(var(--vh,1vh)*30),220px);width:min(40vw,30dvh,220px)}
+/* fitStage()が枠の実寸から入れる --stim / --arrow（未設定なら従来の大きさ） */
+.rt-stage svg{width:var(--stim,230px);height:var(--stim,230px)}
+.rt-stage .an-stim svg{width:var(--arrow,210px);height:calc(var(--arrow,210px)*.6)}
 .an-fill-r{fill:var(--ballR)}.an-fill-g{fill:var(--good)}
 .an-r{color:var(--stop-ink);background:var(--ballR);border-radius:8px;padding:0 8px}.an-g{color:var(--stop-ink);background:var(--good);border-radius:8px;padding:0 8px}
 .an-big{font-size:1.8rem;line-height:1}
@@ -428,8 +433,10 @@ body.gaming .app{padding-top:8px;padding-bottom:8px}
 .mz{height:100%;display:flex;flex-direction:column;grid-gap:8px;gap:8px}
 .mz-head{display:flex;flex-wrap:wrap;justify-content:space-between;grid-gap:6px 14px;gap:6px 14px;font-weight:700;background:var(--surface);border-radius:16px;padding:8px 14px;box-shadow:var(--shadow);flex:none}
 .mz-stat{color:var(--muted);font-variant-numeric:tabular-nums}
-.mz-box{position:relative;flex:1 1 auto;min-height:0;display:grid;place-items:center;background:var(--surface);border-radius:22px;box-shadow:var(--shadow);padding:8px}
-.mz-svg{display:block;width:300px;height:300px;touch-action:none;user-select:none;-webkit-user-select:none}
+.mz-box{position:relative;flex:1 1 0px;min-height:0;display:grid;place-items:center;background:var(--surface);border-radius:22px;box-shadow:var(--shadow);padding:8px}
+.mz-svg{display:block;position:absolute;left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);width:300px;height:300px;touch-action:none;user-select:none;-webkit-user-select:none}
+.ver{margin:4px 0 0;font-size:.8rem;color:var(--muted);text-align:center}
+.mz-box,.mz-svg,.mz-svg *{touch-action:none;-ms-touch-action:none} /* SVGの中の部品にも付けないと、iPadOSでなぞりが画面スクロール扱いになる */
 .mz-bg{fill:var(--surface-2)}
 .mz-walls line{stroke:var(--ink);stroke-width:1.1;stroke-linecap:round}
 .mz-path{fill:none;stroke:var(--accent);stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;opacity:.85}
@@ -439,7 +446,7 @@ body.gaming .app{padding-top:8px;padding-bottom:8px}
 .mz-foot{flex:none}
 /* おかいもの */
 .shop{height:100%;display:flex;flex-direction:column;grid-gap:8px;gap:8px}
-@media (min-width:760px){.shop{display:grid;grid-template-columns:minmax(260px,.9fr) minmax(0,1.3fr);grid-template-rows:auto minmax(0,1fr);grid-gap:10px;gap:10px}.sh-memo{grid-column:1;grid-row:1}.sh-foot{grid-column:1;grid-row:2;align-self:start}.sh-shelf{grid-column:2;grid-row:1 / 3}}
+@media (min-width:760px){.shop{display:grid;grid-template-columns:minmax(260px,.9fr) minmax(0,1.3fr);grid-template-rows:minmax(0,auto) auto minmax(0,1fr);grid-gap:10px;gap:10px}.sh-memo{grid-column:1;grid-row:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch}.sh-foot{grid-column:1;grid-row:2;align-self:start}.sh-shelf{grid-column:2;grid-row:1 / 4}}
 .sh-memo{background:var(--surface);border-radius:20px;padding:10px 14px;box-shadow:var(--shadow);display:flex;flex-direction:column;grid-gap:6px;gap:6px;flex:none}
 .sh-foot{background:var(--surface);border-radius:20px;padding:10px;box-shadow:var(--shadow);display:flex;flex-direction:column;grid-gap:6px;gap:6px;flex:none}
 .sh-foot .btn{width:100%;min-height:56px}
@@ -547,6 +554,26 @@ select{font:inherit;min-height:52px;border-radius:12px;border:2px solid var(--li
   .gcard .glv{flex-wrap:wrap;justify-content:center}
   .gcard .glast{margin-left:0;width:100%}
 }
+/* ---------- 画面に収まらないときの詰め表示（autoFit() が段階的に付ける） ---------- */
+.sh-memo>*{flex-shrink:0} /* 中身を押しつぶさない（重なり防止） */
+@media (min-width:760px){.shop.footR{grid-template-rows:minmax(0,1fr) auto}.shop.footR .sh-memo{grid-row:1 / 3}.shop.footR .sh-shelf{grid-column:2;grid-row:1}.shop.footR .sh-foot{grid-column:2;grid-row:2;display:grid;grid-template-columns:minmax(0,1fr) 170px;grid-gap:4px 10px;gap:4px 10px;align-items:center;padding:8px 10px}.shop.footR .sh-sum{grid-column:1;padding:4px 10px}.shop.footR .sh-sum b{font-size:1.2rem}.shop.footR .sh-cnt{grid-column:1;font-size:.88rem}.shop.footR .sh-foot .btn{grid-column:2;grid-row:1 / 3;width:100%;min-height:52px}.shop.footR .sl-msg{grid-column:1 / -1}}
+.sh-shelf.tight{grid-gap:4px;gap:4px;padding:8px}.sh-shelf.tight .sh-item{min-height:48px;font-size:1rem}.sh-shelf.tight .sh-ico{font-size:2.5rem}.sh-shelf.tight .sh-name{font-size:1rem}
+.sh-shelf.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-content:start;grid-gap:6px 12px;gap:6px 12px}
+.sh-shelf.two .sh-row{grid-gap:4px;gap:4px;padding:2px}.sh-shelf.two .sh-ico{font-size:2.3rem}.sh-shelf.two .sh-name{font-size:.95rem;grid-gap:4px;gap:4px}.sh-shelf.two .sh-item{font-size:.95rem;min-height:56px;padding:2px}.sh-shelf.two .sh-item b{font-size:.85rem}
+.sh-shelf.two .sh-name{flex-direction:column;justify-content:center;text-align:center;line-height:1.15;grid-gap:0;gap:0;font-size:.85rem}.sh-shelf.two.tight .sh-item{min-height:44px}.sh-shelf.two.tight .sh-ico{font-size:1.6rem}.sh-shelf.two.tight .sh-name{font-size:.8rem}.sh-shelf.two.tight .sh-row{padding:0 2px}.sh-shelf.two.tight{grid-row-gap:4px;row-gap:4px}
+.sh-memo.tight2 .sh-need li{font-size:.85rem}.sh-memo.tight2 .sl-rules li{font-size:.8rem;padding:2px 6px}.sh-memo.tight2 .sh-sec>b{font-size:.78rem}.sh-memo.tight2 .ei{font-size:1.4rem}
+.sh-memo.tight{padding:8px 12px;grid-gap:4px;gap:4px}.sh-memo.tight h3{font-size:1.05rem}.sh-memo.tight .sh-need li{font-size:.92rem;padding:2px 8px}.sh-memo.tight .sl-rules li{font-size:.85rem;padding:3px 8px;line-height:1.35}
+.errand.tight .memo{padding:10px 12px;grid-gap:6px;gap:6px}.errand.tight .memo h3{font-size:1.05rem}
+.errand.tight .todo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-gap:6px;gap:6px}
+.errand.tight .todo li{grid-template-columns:30px minmax(0,1fr);grid-column-gap:6px;column-gap:6px;padding:4px 8px}.errand.tight .todo .ord{width:28px;height:28px}
+.errand.tight .todo .tname{font-size:.95rem}.errand.tight .todo .ttask{font-size:.8rem}
+.errand.tight .rules li,.errand.tight .checks li{font-size:.88rem;padding:5px 10px;line-height:1.4}
+.errand.tight .memo .hint{font-size:.82rem;line-height:1.4}
+.errand.tight .memo-actions{flex-wrap:nowrap}.errand.tight .memo-actions .btn{flex:1 1 0px;min-width:0;padding-left:6px;padding-right:6px;font-size:.92rem}
+.errand.tight2 .memo .hint{display:none}.errand.tight2 .map-wrap{flex-grow:1.05}
+.slots.tight .sl-head{padding:8px 12px}.slots.tight .sl-col{padding:8px;grid-gap:6px;gap:6px}.slots.tight .sl-list{grid-gap:6px;gap:6px}
+.slots.tight .sl-card,.slots.tight .sl-empty{min-height:46px}.slots.tight .sl-card{padding:3px 10px}.slots.tight .sl-card .ic{font-size:2.1rem}.slots.tight .sl-rules li{font-size:.9rem;padding:4px 10px}
+.slots.tight2 .sl-card,.slots.tight2 .sl-empty{min-height:40px}.slots.tight2 .sl-card .ic{font-size:1.7rem}.slots.tight2 .sl-head h3{font-size:1.1rem}.slots.tight2 .sl-rules li{font-size:.85rem;padding:3px 8px;line-height:1.35}
 </style>
 
 </head>
@@ -586,6 +613,7 @@ select{font:inherit;min-height:52px;border-radius:12px;border:2px solid var(--li
     <span class="mb-go">はじめる</span>
   </button>
   <div class="glist" id="gameList"></div>
+  <p class="ver">更新日 2026年10月19日（古いiPad対応）</p>
 </section>
 
 <!-- 開始前 -->
@@ -689,8 +717,15 @@ select{font:inherit;min-height:52px;border-radius:12px;border:2px solid var(--li
 /* ================= 古いSafari（iPadOS 14以前など）向けの補助 ================= */
 (function(){
   /* 1) 画面の実際の高さ（古いiOSでは100vhがツールバー分はみ出す） */
-  const setH=()=>document.documentElement.style.setProperty('--app-h',window.innerHeight+'px');
-  setH();window.addEventListener('resize',setH);window.addEventListener('orientationchange',()=>setTimeout(setH,300));
+  /* CSSの calc(100dvh - env(...)) は iOS 11.2〜15.3 で「高さ未指定」になり画面が縮むため、実寸(px)をJSで直接入れる */
+  const probe=document.createElement('div');probe.style.cssText='position:absolute;visibility:hidden;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)';
+  const setH=()=>{const h=window.innerHeight,de=document.documentElement;
+    de.style.setProperty('--app-h',h+'px');de.style.setProperty('--vh',(h/100)+'px');
+    if(!probe.parentNode&&document.body)document.body.appendChild(probe);
+    const cs=probe.parentNode?getComputedStyle(probe):null,ins=cs?(parseFloat(cs.paddingTop)||0)+(parseFloat(cs.paddingBottom)||0):0;
+    const g=document.getElementById('scr-game');if(g)g.style.height=Math.max(460,h-16-ins)+'px';};
+  setH();window.addEventListener('resize',setH);window.addEventListener('orientationchange',()=>{setTimeout(setH,300);setTimeout(setH,800);});
+  document.addEventListener('DOMContentLoaded',setH);
   /* 2) flexの「gap（すき間）」が使えないブラウザでは、余白(margin)で代わりにすき間を作る */
   const t=document.createElement('div');t.style.cssText='display:flex;flex-direction:column;row-gap:1px;position:absolute;visibility:hidden';
   t.appendChild(document.createElement('div'));t.appendChild(document.createElement('div'));document.documentElement.appendChild(t);
@@ -726,10 +761,16 @@ select{font:inherit;min-height:52px;border-radius:12px;border:2px solid var(--li
   window.addEventListener('resize',()=>setTimeout(sched,100));
 })();
 /* タッチ操作：PointerEventが無い古いSafariでは、touchで代わりに受け付ける */
-const HAS_PTR=!!window.PointerEvent;
-function onDown(el,fn){if(HAS_PTR)el.addEventListener('pointerdown',fn);else{el.addEventListener('touchstart',e=>fn(tpt(e)),{passive:false});el.addEventListener('mousedown',fn);}}
-function onMove(el,fn){if(HAS_PTR)el.addEventListener('pointermove',fn);else{el.addEventListener('touchmove',e=>fn(tpt(e)),{passive:false});el.addEventListener('mousemove',fn);}}
-function onUp(el,fn){if(HAS_PTR)['pointerup','pointercancel','pointerleave'].forEach(ev=>el.addEventListener(ev,fn));else['touchend','touchcancel','mouseup','mouseleave'].forEach(ev=>el.addEventListener(ev,fn));}
+const HAS_PTR=!!window.PointerEvent,HAS_TOUCH='ontouchstart' in window;
+/* 指の操作は touch で受ける（iPadOS 13〜14 はSVG上の touch-action が効かず、ポインター操作が途中で取り消されるため）。
+   マウス・ペン（トラックパッド含む）は pointer、無ければ mouse で受ける */
+const notTouch=fn=>e=>{if(!HAS_TOUCH||e.pointerType==='mouse')fn(e);}; /* 指・Apple Pencilは touch 側で受けるので二重にしない */
+function onDown(el,fn){if(HAS_TOUCH)el.addEventListener('touchstart',e=>fn(tpt(e)),{passive:false});
+  if(HAS_PTR)el.addEventListener('pointerdown',notTouch(fn));else el.addEventListener('mousedown',fn);}
+function onMove(el,fn){if(HAS_TOUCH)el.addEventListener('touchmove',e=>{e.preventDefault();fn(tpt(e));},{passive:false});
+  if(HAS_PTR)el.addEventListener('pointermove',notTouch(fn));else el.addEventListener('mousemove',fn);}
+function onUp(el,fn){if(HAS_TOUCH)['touchend','touchcancel'].forEach(ev=>el.addEventListener(ev,fn));
+  if(HAS_PTR)['pointerup','pointercancel','pointerleave'].forEach(ev=>el.addEventListener(ev,notTouch(fn)));else['mouseup','mouseleave'].forEach(ev=>el.addEventListener(ev,fn));}
 function tpt(e){const t=(e.touches&&e.touches[0])||(e.changedTouches&&e.changedTouches[0])||{};return{clientX:t.clientX,clientY:t.clientY,preventDefault:()=>e.preventDefault(),target:e.target};}
 /* ================= 基本 ================= */
 const $=s=>document.querySelector(s);
@@ -1001,7 +1042,46 @@ function fitTower(){const bd=$('#tboard');if(!bd)return;const pg=bd.querySelecto
   const b=Math.max(30,Math.floor(Math.min((W-78)/3.6,(H-34)/3.6,140)));
   pg.style.setProperty('--b',b+'px');pg.style.gap=Math.round(b*.3)+'px';}
 function watchFit(ctx,fn){try{const ro=new ResizeObserver(()=>{if(ctx.dead()){ro.disconnect();return;}fn();});ro.observe(ctx.area);}catch(e){}
+  /* ResizeObserverの無い古いSafari（iOS 13.0以前）向け：表示直後・文字の読み込み後にも合わせ直す */
+  const again=()=>{if(!ctx.dead())fn();};[120,500,1200].forEach(t=>setTimeout(again,t));
+  try{document.fonts&&document.fonts.ready&&document.fonts.ready.then(again);}catch(e){}
   const h=()=>{if(ctx.dead()){window.removeEventListener('resize',h);return;}setTimeout(fn,60);};window.addEventListener('resize',h);window.addEventListener('orientationchange',h);}
+/* ゲーム枠の高さを実寸(px)で入れる：古いWebKitは、上下を固定した枠の中のgrid/flexの高さを中身から決めてしまい、
+   スクロールが要る・はみ出す原因になるため。あわせて、収まらないときは段階的に詰め表示にする（autoFit） */
+const FITS=[
+  ['.errand .memo','.errand',[['tight'],['tight','tight2']]],['.slots',null,[['tight'],['tight','tight2']]]];
+/* おかいもの：①棚を詰める→2列 ②合計・レジを棚の下へ、の順に試し、メモと棚の両方が収まる形を選ぶ */
+function fitShopLayout(){const shop=document.querySelector('.shop');if(!shop)return false;
+  const sh=shop.querySelector('#shShelf'),mm=shop.querySelector('.sh-memo');if(!sh||!mm)return false;
+  const over=e=>e.scrollHeight>e.clientHeight+2,key=()=>shop.className+'|'+sh.className+'|'+mm.className,before=key();
+  const steps=[[],['tight'],['two'],['two','tight']],ALL=['tight','two'];
+  const fitShelf=()=>{for(let i=0;i<steps.length;i++){ALL.forEach(c=>sh.classList.remove(c));steps[i].forEach(c=>sh.classList.add(c));if(!over(sh))return true;}return false;};
+  const tryL=footR=>{if(footR)shop.classList.add('footR');else shop.classList.remove('footR');mm.classList.remove('tight');mm.classList.remove('tight2');
+    const ok=fitShelf();if(over(mm))mm.classList.add('tight');if(over(mm))mm.classList.add('tight2');return ok&&!over(mm);};
+  if(!tryL(false)&&!tryL(true))tryL(false);
+  return key()!==before;}
+function autoFit(){
+  const A=document.querySelectorAll('.area,.msub');let changed=false;
+  for(let i=0;i<A.length;i++){const a=A[i],h=a.clientHeight;if(!h)continue;
+    for(let j=0;j<a.children.length;j++){const c=a.children[j];if(/(^|\s)(overlay|count|toast)(\s|$)/.test(c.className))continue;if(c.style.height!==h+'px'){c.style.height=h+'px';changed=true;}}}
+  if(fitShopLayout())changed=true;
+  const over=e=>e.scrollHeight>e.clientHeight+2;
+  FITS.forEach(([box,tgt,steps])=>{document.querySelectorAll(box).forEach(b=>{const t=tgt?b.closest(tgt):b;if(!t)return;
+    const all=[].concat.apply([],steps),before=t.className;all.forEach(c=>t.classList.remove(c));
+    for(let k=0;k<steps.length&&over(b);k++){all.forEach(c=>t.classList.remove(c));steps[k].forEach(c=>t.classList.add(c));}
+    if(t.className!==before)changed=true;});});
+  if(changed)try{window.dispatchEvent(new Event('resize'));}catch(e){}
+}
+(function(){let pend=false;const go=()=>{if(pend)return;pend=true;(window.requestAnimationFrame||setTimeout)(()=>{pend=false;autoFit();});};
+  const start=()=>{const a=document.getElementById('scr-game')||document.body;
+    try{new MutationObserver(ms=>{for(let i=0;i<ms.length;i++)for(let j=0;j<ms[i].addedNodes.length;j++)if(ms[i].addedNodes[j].nodeType===1){go();setTimeout(go,150);setTimeout(go,600);return;}}).observe(a,{childList:true,subtree:true});}catch(e){}
+    let rt=null;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(autoFit,120);});};
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();})();
+/* 刺激の図形を、枠(rt-stage)の実寸に合わせる（画面の高さ基準だと、横向きで枠からはみ出すため） */
+function fitStage(st){if(!st)return;const H=st.clientHeight-28,W=st.clientWidth-28;if(H<40||W<40)return;
+  st.style.setProperty('--stim',Math.floor(Math.max(60,Math.min(240,H,W*.6)))+'px');
+  st.style.setProperty('--arrow',Math.floor(Math.max(80,Math.min(220,W*.5,H/.6)))+'px');}
+function watchStage(ctx,st){fitStage(st);setTimeout(()=>fitStage(st),80);watchFit(ctx,()=>fitStage(st));}
 function runTower(ctx){
   watchFit(ctx,fitTower);
   const L=ctx.level,N=ctx.quick?1:4,need=[2,3,4,5,6][L-1];let idx=0;const rec=[];
@@ -1102,10 +1182,12 @@ function errandProblem(L){
 }
 const km=d=>(d/400).toFixed(1);
 function fitErrand(){const er=$('.errand'),mw=$('.map-wrap'),svg=$('.map');if(!er||!mw||!svg)return;
-  const grid=getComputedStyle(er).display==='grid';let W,H;
-  if(grid){W=mw.clientWidth-12;H=er.clientHeight-12;}
-  else{W=er.clientWidth-12;H=er.clientHeight*0.56-12;}
-  const w=Math.max(200,Math.floor(Math.min(W,H*1000/720)));svg.style.width=w+'px';svg.style.height=Math.round(w*.72)+'px';}
+  const side=getComputedStyle(er).flexDirection==='row',memo=er.querySelector('.memo');let W,H;
+  const set=()=>{const w=Math.max(200,Math.floor(Math.min(W,H*1000/720)));svg.style.width=w+'px';svg.style.height=Math.round(w*.72)+'px';};
+  if(side){W=mw.clientWidth-12;H=er.clientHeight-12;set();return;}
+  W=er.clientWidth-12;H=er.clientHeight*0.56-12;set();
+  /* 縦向き：メモが枠に収まらない分だけ地図を小さくする（スクロールせずに全部見えるように） */
+  if(memo){const def=memo.scrollHeight-memo.clientHeight;if(def>2){H=Math.max(er.clientHeight*0.3-12,H-def-4);set();}}}
 function runErrand(ctx){
   watchFit(ctx,fitErrand);
   const L=ctx.level,N=ctx.quick?1:2;let pi=0;const rec=[];
@@ -1266,7 +1348,7 @@ function runTrail(ctx){
 /* ================= 4. ゴー・ストップ ================= */
 const GNG_CFG=[{n:20,dur:1800,sw:[]},{n:24,dur:1500,sw:[]},{n:24,dur:1400,sw:[12]},{n:30,dur:1250,sw:[10,20]},{n:32,dur:1100,sw:[8,16,24]}];
 const FRUITS=['🍎','🍌','🍇','🍊','🍓','🍑','🍐','🍒'];
-const VEGS=['🥕','🥦','🍆','🥒','🌽','🥬','🧅','🥔'];
+const VEGS=['🥕','🥦','🍆','🥒','🌽','🥬','🥔']; /* 🧅はiOS 13.2以降でないと表示されない（iOS 12までの古いiPadでは□になる）ため除いた */
 function runGonogo(ctx){
   const L=ctx.level;
   const B0=GNG_CFG[L-1],C=ctx.quick?{n:Math.round(B0.n/2),dur:B0.dur,sw:B0.sw.map(x=>Math.round(x/2))}:B0;
@@ -1413,7 +1495,7 @@ function runBiv(ctx,o){
   else{let c=pick(['A','B']);for(let i=0;i<N;i++){if(i&&Math.random()<.5)c=c==='A'?'B':'A';cues.push(c);}}
   ctx.area.innerHTML=`<div class="rt"><div class="rt-cue" id="rCue"></div><div class="rt-stage" id="rStage"><div class="rt-stim" id="rStim"></div><span class="rt-fb" id="rFb"></span></div>
     <div class="rt-btns" id="rBtns" style="--n:2"><button class="rt-btn" data-v="L">${o.btnL}</button><button class="rt-btn" data-v="R">${o.btnR}</button></div></div>`;
-  const cue=$('#rCue'),st=$('#rStage'),stim=$('#rStim'),fb=$('#rFb'),btns=$('#rBtns');
+  const cue=$('#rCue'),st=$('#rStage'),stim=$('#rStim'),fb=$('#rFb'),btns=$('#rBtns');watchStage(ctx,st);
   const rec=[];
   (async()=>{
     await sleep(500);
@@ -1515,7 +1597,7 @@ function runMaze(ctx){
     <circle id="mzMe" r="${S*.24}" class="mz-me"/>${hits}</svg></div>
     <div class="mz-foot"><p class="hint">なぞる前に、目でゴールまでの道をたどってみましょう。戻るときは、来た道をなぞります。</p></div></div>`;
   const fitMaze=()=>{const bx=$('.mz-box'),sv=$('#mzSvg');if(!bx||!sv)return;const s=Math.max(160,Math.floor(Math.min(bx.clientWidth,bx.clientHeight)-18));sv.style.width=s+'px';sv.style.height=s+'px';};
-  fitMaze();watchFit(ctx,fitMaze);
+  fitMaze();setTimeout(fitMaze,80);watchFit(ctx,fitMaze);
   const svg=$('#mzSvg');let down=false,lastKey=start;
   const draw=()=>{$('#mzPath').setAttribute('points',path.map(([x,y])=>`${x*S+S/2},${y*S+S/2}`).join(' '));const [x,y]=path[path.length-1];const me=$('#mzMe');me.setAttribute('cx',x*S+S/2);me.setAttribute('cy',y*S+S/2);
     $('#mzStat').textContent=`${stars.length?`⭐ ${got.size}/${stars.length}　`:''}まよった回数 ${stray}`;};
@@ -1648,7 +1730,7 @@ function runAnti(ctx){
   ctx.area.innerHTML=`<div class="rt"><div class="rt-cue c-shape">${cf.mix?'<span class="an-r">赤</span>は はんたい ／ <span class="an-g">緑</span>は 同じ向き':'矢印と はんたいの ボタン'}</div>
     <div class="rt-stage"><div class="rt-stim an-stim" id="aStim"></div><span class="rt-fb" id="aFb"></span></div>
     <div class="rt-btns" id="aBtns" style="--n:2"><button class="rt-btn" data-v="L"><span class="an-big">←</span>ひだり</button><button class="rt-btn" data-v="R">みぎ<span class="an-big">→</span></button></div></div>`;
-  const stim=$('#aStim'),fb=$('#aFb'),btns=$('#aBtns');const rec=[];
+  const stim=$('#aStim'),fb=$('#aFb'),btns=$('#aBtns');const rec=[];watchStage(ctx,stim.parentNode);
   (async()=>{
     await sleep(500);
     for(let i=0;i<N;i++){
